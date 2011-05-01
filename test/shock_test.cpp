@@ -3,8 +3,8 @@
 
 int main ()
 {
-  ShExpPanel flow (-1.0, 1.0, 0.0, 1.0);
-  ShExpPanel pan (0.0, 1.0, 1.0, -tan(5.0/57.2957795));
+  ShExpPanel flow (-1.0, 0.0, 0.0, 0.0);
+  ShExpPanel pan (0.0, 0.0, 1.0, tan(5.0/57.2957795));
   const double k = 1.4;
 
   flow.set_mach (2.0);
@@ -18,7 +18,7 @@ int main ()
   flow.set_v (0.0);
   try
     {
-      solve_expansion (flow, pan, k);
+      solve_shock (flow, pan, k);
     }
   catch (std:: exception& e)
     {

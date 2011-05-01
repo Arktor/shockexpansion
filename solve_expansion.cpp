@@ -1,5 +1,6 @@
 #include "shexp.hpp"
 
+using namespace std;
 
 double exp_equation (double pan_slp, double mach1, double mach2,	\
 		     double k)
@@ -22,19 +23,19 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   int niter = 0;
   const double eps = 0.000001;
 
+  cout << "------------------------------\n";
+  cout << "------------------------------\n";
+  cout << "Solving expansion wave equation:\n";
+  cout << "------------------------------\n";
+  cout << "Mach number: " << scientific << setprecision (5) << mach1 << endl;
+  cout << "Relative slope: " << slp << " [rad]" << endl;
+  cout << "Convergence criterion: Res = " << eps << endl;
+  cout << "------------------------------\n";
+  cout << "Convergence history:\n";
+  cout << "------------------------------\n";
+
   if ((1 + 0.5*(k-1)*mach1*slp)<=0.0)
     throw ShExpException ("Error: too large angle. Vacuum at the panel.\n");
-
-  std:: cout << "\n-------------------------------------\n";
-  std:: cout << "*************************************\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Solving expansion wave equation:\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Mach number: " << mach1 << "\nRelative slope (rad): "	\
-	     << slp << "\n" << "Convergence criterion: Res=" << eps << "\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Convergence history:\n";
-  std:: cout << "-------------------------------------\n";
 
   mach_cur = mach1/(1 + 0.5*(k-1)*mach1*slp);
   mach_new = mach_cur - exp_equation(slp, mach1, mach_cur, k)*	\
@@ -42,7 +43,7 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
 			    exp_equation(slp, mach1, mach_prev, k));
   res_new = fabs(exp_equation(slp, mach1, mach_new, k));
 
-  std:: cout << "Iteration#" << niter << ": " << "Res=" << res_new << "\n";
+  cout << "Iteration#" << niter << ": " << "Res = " << res_new << endl;
 
   while (res_new>eps)
     {
@@ -54,16 +55,16 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
       res_prev = res_new;
       res_new = fabs(exp_equation(slp, mach1, mach_new, k));
       niter++;
-      std:: cout << "Iteration#" << niter << ": " << "Res=" << res_new << "\n";
+      cout << "Iteration#" << niter << ": " << "Res = " << res_new << endl;
 
       if (res_new>=res_prev)
 	throw ShExpException ("Error: couldn't solve shock equation.\n");
     }
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Convergence criterion reached.\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Results:\n";
-  std:: cout << "-------------------------------------\n";
+  cout << "------------------------------\n";
+  cout << "Convergence criterion reached.\n";
+  cout << "------------------------------\n";
+  cout << "Results:\n";
+  cout << "------------------------------\n";  
 
   pan_right.set_mach (mach_new);
   pan_right.set_wave_slp (pan_right.slp() + asin(1.0/mach_new));
@@ -76,11 +77,10 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   pan_right.set_u (pan_right.vel()*cos(pan_right.slp(RAD)));
   pan_right.set_v (pan_right.vel()*sin(pan_right.slp(RAD)));
 
-  std:: cout << "Shock wave slope (rad): " << pan_right.wave_slp(RAD) << "\n";
-  std:: cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
-  std:: cout << "Mach number: " << pan_right.mach() << "\n";
-  std:: cout << "Pressure: " << pan_right.p() << " [Pa]\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "*************************************\n";
-  std:: cout << "-------------------------------------\n";
+  cout << "Expansion wave slope: " << pan_right.wave_slp(RAD) << " [rad]\n";
+  cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
+  cout << "Mach number: " << pan_right.mach() << "\n";
+  cout << "Pressure: " << pan_right.p() << " [Pa]\n";
+  cout << "------------------------------\n";
+  cout << "------------------------------\n";
 }

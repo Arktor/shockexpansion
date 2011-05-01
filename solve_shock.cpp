@@ -1,6 +1,9 @@
 #include "shexp.hpp"
 
 
+using namespace std;
+
+
 double shock_equation (double pan_slp, double wave_slp, double mach,	\
 		       double k)
 {
@@ -22,25 +25,25 @@ void solve_shock (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   double res_prev, res_new;
   int niter = 0;
   const double eps = 0.000001;
-
-  std:: cout << "\n-------------------------------------\n";
-  std:: cout << "*************************************\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Solving shock wave equation:\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Mach number: " << mach1 << "\nRelative slope (rad): "	\
-	     << slp << "\n" << "Convergence criterion: Res=" << eps << "\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Convergence history:\n";
-  std:: cout << "-------------------------------------\n";
-
+  
+  cout << "------------------------------\n";
+  cout << "------------------------------\n";
+  cout << "Solving shock wave equation:\n";
+  cout << "------------------------------\n";
+  cout << "Mach number: " << scientific << setprecision (5) << mach1 << endl;
+  cout << "Relative slope: " << slp << " [rad]" << endl;
+  cout << "Convergence criterion: Res = " << eps << endl;
+  cout << "------------------------------\n";
+  cout << "Convergence history:\n";
+  cout << "------------------------------\n";
+  
   slp_cur = 0.25*slp*(k+1) + sqrt(pow(0.25*slp*(k+1), 2)+1/mach1/mach1);
   slp_new = slp_cur - shock_equation(slp, slp_cur, mach1, k)*\
     (slp_cur-slp_prev)/(shock_equation(slp, slp_cur, mach1, k)-		\
 			shock_equation(slp, slp_prev, mach1, k));
   res_new = fabs(shock_equation(slp, slp_new, mach1, k));
 
-  std:: cout << "Iteration#" << niter << ": " << "Res=" << res_new << "\n";
+  cout << "Iteration#" << niter << ": " << "Res = " << res_new << endl;
 
   while (res_new>eps)
     {
@@ -52,16 +55,16 @@ void solve_shock (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
       res_prev = res_new;
       res_new = fabs(shock_equation(slp, slp_new, mach1, k));
       niter++;
-      std:: cout << "Iteration#" << niter << ": " << "Res=" << res_new << "\n";
+      cout << "Iteration#" << niter << ": " << "Res = " << res_new << endl;
 
       if (res_new>=res_prev)
 	throw ShExpException ("Error: couldn't solve shock equation.\n");
     }
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Convergence criterion reached.\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "Results:\n";
-  std:: cout << "-------------------------------------\n";
+  cout << "------------------------------\n";
+  cout << "Convergence criterion reached.\n";
+  cout << "------------------------------\n";
+  cout << "Results:\n";
+  cout << "------------------------------\n";
 
   cpl1 = 2.0*(sin(slp_new)*sin(slp_new) - 1/mach1/mach1)/(k+1);
   pan_right.set_wave_slp (slp_new + pan_left.slp());
@@ -77,11 +80,10 @@ void solve_shock (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   pan_right.set_u (pan_right.vel()*cos(pan_right.slp(RAD)));
   pan_right.set_v (pan_right.vel()*sin(pan_right.slp(RAD)));
 
-  std:: cout << "Shock wave slope (rad): " << pan_right.wave_slp(RAD) << "\n";
-  std:: cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
-  std:: cout << "Mach number: " << pan_right.mach() << "\n";
-  std:: cout << "Pressure: " << pan_right.p() << " [Pa]\n";
-  std:: cout << "-------------------------------------\n";
-  std:: cout << "*************************************\n";
-  std:: cout << "-------------------------------------\n";
+  cout << "Shock wave slope: " << pan_right.wave_slp(RAD) << " [rad]\n";
+  cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
+  cout << "Mach number: " << pan_right.mach() << "\n";
+  cout << "Pressure: " << pan_right.p() << " [Pa]\n";
+  cout << "------------------------------\n";
+  cout << "------------------------------\n";
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include "shexpexception.hpp"
 #include "shexpnode.hpp"
