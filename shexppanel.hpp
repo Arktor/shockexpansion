@@ -33,6 +33,7 @@ class ShExpPanel
   double force_y;
 
  public:
+  ShExpPanel () throw ();
   ShExpPanel (ShExpNode node1, ShExpNode node2) throw (ShExpException);
   ShExpPanel (double x1, double y1, double x2,	double y2)\
     throw (ShExpException);

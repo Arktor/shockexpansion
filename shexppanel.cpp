@@ -2,6 +2,14 @@
 #include "shexppanel.hpp"
 
 
+ShExpPanel:: ShExpPanel () throw ()
+  : node_left (0.0, 0.0), node_right (1.0, 0.0)
+{
+  slope = 0.0;
+}
+
+
+
 ShExpPanel:: ShExpPanel (ShExpNode node1, ShExpNode node2) \
   throw (ShExpException)
   : node_left (), node_right ()
