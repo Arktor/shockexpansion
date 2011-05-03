@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
     }
   
   for (unsigned int i=1; i<airfoil.size(); i++)
-    cx+=2*airfoil[i].p()*airfoil[i].ar()*sin(airfoil[i].slp(RAD))/q0/area_all;
+    cx+=2*airfoil[i].p()*airfoil[i].ar()*sin(airfoil[i].slp(RAD))/q0;
     
   cout << "Cx=" << cx << endl;
   return 0;
