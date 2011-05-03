@@ -29,8 +29,7 @@ class ShExpPanel
   double pressure;
   double pressure_coefficient;
   double wave_slope;
-  double force_x;
-  double force_y;
+  double area;
 
  public:
   ShExpPanel () throw ();
@@ -44,6 +43,7 @@ class ShExpPanel
   ShExpNode node1 () const throw (); //< Returns the left node.
   ShExpNode node2 () const throw (); //< Returns the right node.
   double slp (AngleFormat sf = RAD) const throw ();
+  double ar () const throw ();
   double vel () const throw ();
   double u () const throw ();
   double v () const throw ();
@@ -56,15 +56,7 @@ class ShExpPanel
   //< Returns a shock wave or expansion wave slope on the panel.
 
   double wave_slp (AngleFormat sf = RAD) const throw ();
-
-  //< Returns an x component of the force applied to the panel;
-  
-  double f_x () const throw ();
-
-  //< Returns an y component of the force applied to the panel.
-
-  double f_y () const throw ();
-  void set_nodes (ShExpNode new_node1, ShExpNode new_node2) \
+  void set_nodes (ShExpNode new_node1, ShExpNode new_node2)	\
     throw (ShExpException);
   void set_nodes (double x1, double y1, double x2, double y2)\
     throw (ShExpException);
@@ -75,10 +67,8 @@ class ShExpPanel
   ShExpPanel& set_mach (double new_mach) throw (ShExpException);
   ShExpPanel& set_ro (double new_ro) throw (ShExpException);
   ShExpPanel& set_p (double new_p) throw (ShExpException);
-  ShExpPanel& set_cp (double new_cp) throw (ShExpException);
+  ShExpPanel& set_cp (double new_cp) throw ();
   ShExpPanel& set_wave_slp (double new_wave_slp) throw ();
-  ShExpPanel& set_f_x (double new_f_x) throw ();
-  ShExpPanel& set_f_y (double new_f_y) throw ();
 };
 
 
@@ -103,6 +93,12 @@ inline double ShExpPanel:: y1 () const throw ()
 inline double ShExpPanel:: y2 () const throw ()
 {
   return node_right.y();
+}
+
+
+inline double ShExpPanel:: ar () const throw ()
+{
+  return area;
 }
 
 
@@ -163,18 +159,6 @@ inline double ShExpPanel:: p () const throw ()
 inline double ShExpPanel:: cp () const throw ()
 {
   return pressure_coefficient;
-}
-
-
-inline double ShExpPanel:: f_x () const throw ()
-{
-  return force_x;
-}
-
-
-inline double ShExpPanel:: f_y () const throw ()
-{
-  return force_y;
 }
 
 

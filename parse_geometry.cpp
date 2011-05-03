@@ -7,7 +7,7 @@ void parse_geometry (ifstream& inp, vector<ShExpPanel>& airfoil)\
 {
   string buf, val_buf;
   stringstream valstr (val_buf);
-  size_t npans = 0;
+  size_t npans = 1;
   ShExpNode node1 (-1.0, 0.0), node2;
   ShExpPanel pan (0.0, 0.0, 1.0, 0.0);
 
@@ -22,10 +22,7 @@ void parse_geometry (ifstream& inp, vector<ShExpPanel>& airfoil)\
       if (node2.x()!=0.0 || node2.y()!=0.0)
 	throw ShExpException ("Error: incorrect first node placement.\n");
 
-      npans++;
-      airfoil.resize (npans);
-      pan.set_nodes (node1, node2);
-      airfoil[npans-1] = pan;
+      airfoil[npans-1].set_nodes (node1, node2);
 
       while (!inp.eof())
 	{

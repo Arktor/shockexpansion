@@ -26,4 +26,9 @@ void parse_problem_def (ifstream& inp, ShExpPanel& flow_pan)
   flow_pan.set_mach (mach_number);
   flow_pan.set_p (pressure);
   flow_pan.set_ro (density);
+  flow_pan.set_a (sqrt(1.4*pressure/density));
+  flow_pan.set_u (flow_pan.a()*flow_pan.mach());
+  flow_pan.set_v (0.0);
+  flow_pan.set_vel (flow_pan.u());
+  flow_pan.set_cp (0.0);
 }

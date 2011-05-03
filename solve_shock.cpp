@@ -12,7 +12,7 @@ double shock_equation (double pan_slp, double wave_slp, double mach,	\
 }
 
 
-void solve_shock (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
+void solve_shock (ShExpPanel& pan_left, ShExpPanel& pan_right,	\
 		  double k) throw (ShExpException)
 {
   double mach1 = pan_left.mach ();
