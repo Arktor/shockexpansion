@@ -26,16 +26,15 @@ void solve_shock (ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   int niter = 0;
   const double eps = 0.000001;
   
-  cout << "------------------------------\n";
-  cout << "------------------------------\n";
-  cout << "Solving shock wave equation:\n";
-  cout << "------------------------------\n";
-  cout << "Mach number: " << scientific << setprecision (5) << mach1 << endl;
-  cout << "Relative slope: " << slp << " [rad]" << endl;
-  cout << "Convergence criterion: Res = " << eps << endl;
-  cout << "------------------------------\n";
+  cout << "Solving shock wave equation...\n";
+  cout << "----------------------------------------\n";
+  cout << "Mach number:           " << scientific << setprecision (5) << \
+    mach1 << endl;
+  cout << "Relative slope:        " << slp << " [rad]" << endl;
+  cout << "Convergence criterion: " << eps << endl;
+  cout << "----------------------------------------\n";
   cout << "Convergence history:\n";
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
   
   slp_cur = 0.25*slp*(k+1) + sqrt(pow(0.25*slp*(k+1), 2)+1/mach1/mach1);
   slp_new = slp_cur - shock_equation(slp, slp_cur, mach1, k)*\
@@ -60,11 +59,11 @@ void solve_shock (ShExpPanel& pan_left, ShExpPanel& pan_right,	\
       if (res_new>=res_prev)
 	throw ShExpException ("Error: couldn't solve shock equation.\n");
     }
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
   cout << "Convergence criterion reached.\n";
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
   cout << "Results:\n";
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
 
   cpl1 = 2.0*(sin(slp_new)*sin(slp_new) - 1/mach1/mach1)/(k+1);
   pan_right.set_wave_slp (slp_new + pan_left.slp());
@@ -81,9 +80,9 @@ void solve_shock (ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   pan_right.set_v (pan_right.vel()*sin(pan_right.slp(RAD)));
 
   cout << "Shock wave slope: " << pan_right.wave_slp(RAD) << " [rad]\n";
-  cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
-  cout << "Mach number: " << pan_right.mach() << "\n";
-  cout << "Pressure: " << pan_right.p() << " [Pa]\n";
-  cout << "------------------------------\n";
-  cout << "------------------------------\n";
+  cout << "Velocity:         " << pan_right.vel() << " [m*s^-1]\n";
+  cout << "Mach number:      " << pan_right.mach() << "\n";
+  cout << "Pressure:         " << pan_right.p() << " [Pa]\n";
+  cout << "----------------------------------------\n";
+  cout << "----------------------------------------\n";
 }

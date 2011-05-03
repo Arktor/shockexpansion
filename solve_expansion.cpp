@@ -23,16 +23,15 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   int niter = 0;
   const double eps = 0.000001;
 
-  cout << "------------------------------\n";
-  cout << "------------------------------\n";
-  cout << "Solving expansion wave equation:\n";
-  cout << "------------------------------\n";
-  cout << "Mach number: " << scientific << setprecision (5) << mach1 << endl;
-  cout << "Relative slope: " << slp << " [rad]" << endl;
-  cout << "Convergence criterion: Res = " << eps << endl;
-  cout << "------------------------------\n";
+  cout << "Solving expansion wave equation...\n";
+  cout << "----------------------------------------\n";
+  cout << "Mach number:           " << scientific << setprecision (5) << \
+    mach1 << endl;
+  cout << "Relative slope:        " << slp << " [rad]" << endl;
+  cout << "Convergence criterion: " << eps << endl;
+  cout << "----------------------------------------\n";
   cout << "Convergence history:\n";
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
 
   if ((1 + 0.5*(k-1)*mach1*slp)<=0.0)
     throw ShExpException ("Error: too large angle. Vacuum at the panel.\n");
@@ -60,11 +59,11 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
       if (res_new>=res_prev)
 	throw ShExpException ("Error: couldn't solve shock equation.\n");
     }
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
   cout << "Convergence criterion reached.\n";
-  cout << "------------------------------\n";
+  cout << "----------------------------------------\n";
   cout << "Results:\n";
-  cout << "------------------------------\n";  
+  cout << "----------------------------------------\n";  
 
   pan_right.set_mach (mach_new);
   pan_right.set_wave_slp (pan_right.slp() + asin(1.0/mach_new));
@@ -78,9 +77,9 @@ void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
   pan_right.set_v (pan_right.vel()*sin(pan_right.slp(RAD)));
 
   cout << "Expansion wave slope: " << pan_right.wave_slp(RAD) << " [rad]\n";
-  cout << "Velocity: " << pan_right.vel() << " [m*s^-1]\n";
-  cout << "Mach number: " << pan_right.mach() << "\n";
-  cout << "Pressure: " << pan_right.p() << " [Pa]\n";
-  cout << "------------------------------\n";
-  cout << "------------------------------\n";
+  cout << "Velocity:             " << pan_right.vel() << " [m*s^-1]\n";
+  cout << "Mach number:          " << pan_right.mach() << "\n";
+  cout << "Pressure:             " << pan_right.p() << " [Pa]\n";
+  cout << "----------------------------------------\n";
+  cout << "----------------------------------------\n";
 }

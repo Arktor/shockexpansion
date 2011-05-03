@@ -21,10 +21,15 @@ int main (int argc, char *argv[])
       parse_problem_def (inp_str, airfoil[0]);
       q0 = 0.5*airfoil[0].ro()*airfoil[0].vel()*airfoil[0].vel();
       parse_geometry (inp_str, airfoil);
+      cout << "\nSOLVING\n";
+      cout << "----------------------------------------\n";
+      cout << "----------------------------------------\n";
 
       for (unsigned int i=1; i<airfoil.size(); i++)
 	{
 	  area_all+=airfoil[i].ar();
+	  cout << "\nPanel: " << i << endl;
+	  cout << "----------------------------------------\n";
 	  if (fabs(airfoil[i].slp()-airfoil[i-1].slp())<0.00000001)
 	    airfoil[i] = airfoil[i-1];
 	  else if (airfoil[i].slp()<airfoil[i-1].slp())
@@ -39,7 +44,11 @@ int main (int argc, char *argv[])
       cout << e.what();
       return 2;
     }
-  
+  cout << "\nSolving complete.\n\n";
+  cout << "----------------------------------------\n";
+  cout << "----------------------------------------\n";
+  cout << "\nRESULTS.\n";
+  cout << "----------------------------------------\n";
   for (unsigned int i=1; i<airfoil.size(); i++)
     cx+=2*airfoil[i].p()*airfoil[i].ar()*sin(airfoil[i].slp(RAD))/q0;
     
