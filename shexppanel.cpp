@@ -59,6 +59,13 @@ double ShExpPanel:: wave_slp (AngleFormat sf) const throw ()
 }
 
 
+ShExpPanel& ShExpPanel:: set_id (unsigned int new_id) throw (ShExpException)
+{
+  id_number = new_id;
+  return *this;
+}
+
+
 void ShExpPanel:: set_nodes (ShExpNode new_node1, ShExpNode new_node2) \
   throw (ShExpException)
 {

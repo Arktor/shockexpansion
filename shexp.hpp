@@ -36,3 +36,9 @@ void solve_shock (ShExpPanel& pan_left, ShExpPanel& pan_right,	\
 void solve_expansion (const ShExpPanel& pan_left, ShExpPanel& pan_right,	\
 		      double k) throw (ShExpException);
 
+// Output functions
+
+void parser_out (const ShExpPanel& pan, std::ofstream& out)	\
+  throw (ShExpException);
+void solver_out (const ShExpPanel& pan, std::ofstream& out)	\
+  throw (ShExpException);

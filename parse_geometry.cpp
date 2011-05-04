@@ -33,11 +33,14 @@ void parse_geometry (ifstream& inp, vector<ShExpPanel>& airfoil)\
 	{
 	  node1 = node2;
 	  buf = pass_empty_strings (inp);
+	  if (buf.find_first_not_of(" \n\r\t\0")>=buf.size())
+	    break;
 	  node2 = parse_geometry_point (buf);
 	  npans++;
 	  nnodes++;
 	  airfoil.resize (npans);
 	  airfoil[npans-1] = ShExpPanel (node1, node2);
+	  airfoil[npans-1].set_id (npans-1);
 	}
     }
   catch (exception& e)
@@ -46,10 +49,4 @@ void parse_geometry (ifstream& inp, vector<ShExpPanel>& airfoil)\
     }
   if (airfoil[airfoil.size()-1].x2()!=1.0 || airfoil[airfoil.size()-1].y2()!=0.0)
     throw ShExpException ("Error: incorrect last node placement.\n");
-
-  cout << "Parsed successfully.\n";
-  cout << "Nodes: " << nnodes << endl;
-  cout << "Panels: " << npans-1 << endl;
-  cout << "----------------------------------------\n";
-  cout << "----------------------------------------\n";
 }

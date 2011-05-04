@@ -17,6 +17,7 @@ enum AngleFormat {DEG, RAD};
 
 class ShExpPanel
 {
+  unsigned int id_number;
   ShExpNode node_left;
   ShExpNode node_right;
   double slope;
@@ -36,6 +37,7 @@ class ShExpPanel
   ShExpPanel (ShExpNode node1, ShExpNode node2) throw (ShExpException);
   ShExpPanel (double x1, double y1, double x2,	double y2)\
     throw (ShExpException);
+  unsigned int id () const throw ();
   double x1 () const throw (); //< Returns x coordinate of the first (left) node.
   double x2 () const throw (); //< Returns x coordinate of the second (right) node.
   double y1 () const throw (); //< Returns y coordinate of the first (left) node.
@@ -60,6 +62,7 @@ class ShExpPanel
     throw (ShExpException);
   void set_nodes (double x1, double y1, double x2, double y2)\
     throw (ShExpException);
+  ShExpPanel& set_id (unsigned int new_id) throw (ShExpException);
   ShExpPanel& set_vel (double new_vel) throw (ShExpException);
   ShExpPanel& set_u (double new_u) throw (ShExpException);
   ShExpPanel& set_v (double new_v) throw ();
@@ -70,6 +73,12 @@ class ShExpPanel
   ShExpPanel& set_cp (double new_cp) throw ();
   ShExpPanel& set_wave_slp (double new_wave_slp) throw ();
 };
+
+
+inline unsigned int ShExpPanel:: id () const throw ()
+{
+  return id_number;
+}
 
 
 inline double ShExpPanel:: x1 () const throw ()

@@ -9,25 +9,15 @@ void parse_problem_def (ifstream& inp, ShExpPanel& flow_pan)
   double mach_number;
   double pressure;
   double density;
-
-  cout << "----------------------------------------\n";
-  cout << "----------------------------------------\n";
-  cout << "Parsing problem definition...\n";
-  cout << "----------------------------------------\n";
-  
+ 
   try
     {
       buf = pass_empty_strings (inp);
       mach_number = parse_mach_number (buf);
-      cout << "Mach number: " << scientific << setprecision (6) <<	\
-	mach_number << endl;
       buf = pass_empty_strings (inp);
       pressure = parse_pressure (buf);
-      cout << "Pressure:    " << pressure << " [Pa]\n";
       buf = pass_empty_strings (inp);
       density = parse_density (buf);
-      cout << "Density:     " << density << " [kg*m^-3]\n";
-      cout << "----------------------------------------\n";
     }
   catch (exception& e)
     {
