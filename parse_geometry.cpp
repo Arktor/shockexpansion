@@ -28,19 +28,18 @@ void parse_geometry (ifstream& inp, vector<ShExpPanel>& airfoil)\
 	throw ShExpException ("Error: incorrect first node placement.\n");
 
       airfoil[npans-1].set_nodes (node1, node2);
+      buf = pass_empty_strings (inp);
 
-      while (!inp.eof())
+      while (!inp.bad() && !inp.fail() && !inp.eof())
 	{
 	  node1 = node2;
-	  buf = pass_empty_strings (inp);
-	  if (buf.find_first_not_of(" \n\r\t\0")>=buf.size())
-	    break;
 	  node2 = parse_geometry_point (buf);
 	  npans++;
 	  nnodes++;
 	  airfoil.resize (npans);
 	  airfoil[npans-1] = ShExpPanel (node1, node2);
 	  airfoil[npans-1].set_id (npans-1);
+	  buf = pass_empty_strings (inp);
 	}
     }
   catch (exception& e)
