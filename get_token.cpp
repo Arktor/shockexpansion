@@ -1,4 +1,5 @@
 #include "shexp.hpp"
+#include <cstring>
 using namespace std;
 
 
@@ -10,7 +11,7 @@ size_t get_token (const string& src, string& res,	\
   if (pos>=src.size())
     throw ShExpException ("Error: unexpected end of string.\n");
 
-  while (strchr(" =\t", src[cp]))
+  while (strchr(" =\t", src[cp]) && cp<src.size())
     {
       cp++;
 

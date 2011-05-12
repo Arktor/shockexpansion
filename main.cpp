@@ -48,14 +48,14 @@ int main (int argc, char *argv[])
       q0 = 0.5*airfoil[0].ro()*airfoil[0].vel()*airfoil[0].vel();
       parse_geometry (inp_str, airfoil);
 
-        cout << "Parsed successfully.\n";
-	cout << "Nodes:  " << airfoil.size() << endl;
-	cout << "Panels: " << airfoil.size()-1 << endl;
-	cout << "----------------------------------------\n";
-	out_str << "Nodes:  " << airfoil.size() << endl;
-	out_str << "Panels: "<< airfoil.size()-1 << endl;
-	out_str << "----------------------------------------\n";
-
+      cout << "Parsed successfully.\n";
+      cout << "Nodes:  " << airfoil.size() << endl;
+      cout << "Panels: " << airfoil.size()-1 << endl;
+      cout << "----------------------------------------\n";
+      out_str << "Nodes:  " << airfoil.size() << endl;
+      out_str << "Panels: "<< airfoil.size()-1 << endl;
+      out_str << "----------------------------------------\n";
+      
       for (unsigned i=1; i<airfoil.size(); i++)
 	parser_out (airfoil[i], out_str);
 
