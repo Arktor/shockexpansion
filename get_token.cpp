@@ -11,7 +11,7 @@ size_t get_token (const string& src, string& res,	\
   if (pos>=src.size())
     throw ShExpException ("Error: unexpected end of string.\n");
 
-  while (strchr(" =\t", src[cp]) && cp<src.size())
+  while (strchr(" =\t\r\n\0", src[cp]) && cp<src.size())
     {
       cp++;
 

@@ -14,6 +14,7 @@
 
 size_t get_token (const std::string& src, std::string& res,		\
 		  size_t pos) throw (ShExpException);
+bool check_empty_string (std::string& str) throw ();
 std::string pass_empty_strings (std::ifstream& inp) throw (ShExpException);
 double parse_mach_number (const std::string& str) throw (ShExpException);
 double parse_density (const std::string& str) throw (ShExpException);
