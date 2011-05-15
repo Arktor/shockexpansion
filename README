@@ -1,0 +1,5 @@
+Calculates drag force applied to an airfoil in the supersonic adiabatic flow.
+
+Physical model of the fluid is the ideal nonviscous gas without heat transfer.
+Method of calculation, which is used, is "shock-expansion". Flow separation at
+high supersonic speeds is not calculated.
