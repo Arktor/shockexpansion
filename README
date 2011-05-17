@@ -62,7 +62,7 @@ LIMITATIONS
 1. Airfoil geometry must be scaled to have its first node
    at (0.0, 0.0) and its last node at (1.0, 0.0); 
 2. Aince only symmetrical airfoil can be calculated, you should provide
-   only one its upper part;
+   only its upper part;
 3. Too large relative slope values can lead for the flow to become subsonic
    or to separate, which will terminate the calculation.
 
