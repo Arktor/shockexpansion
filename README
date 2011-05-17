@@ -1,5 +1,75 @@
-Calculates drag force applied to an airfoil in the supersonic adiabatic flow.
+SHOCKEXPANSION
 
+    Calculates drag force applied to a symmetrical airfoil in the supersonic
+adiabatic flow at the zero angle-of-attack.
 Physical model of the fluid is the ideal nonviscous gas without heat transfer.
-Method of calculation, which is used, is "shock-expansion". Flow separation at
-high supersonic speeds is not calculated.
+
+
+METHOD DESCRIPTION
+
+    The method used for drag calculation in this application is called
+"shock-expansion". Its basic idea is that supersonic flow around an airfoil
+can be represented with a system of shock waves and expansion waves.
+
+    An airfoil is partitioned into a number of segments called "panels".
+Flow on each panel is considered to be homogeneous and parallel to its surface.
+If parameters of the flow on a certain panel are known, parameters of the flow
+on the adjacent panel downstream can be calculated using equations of a shock
+wave or expansion wave. Type of equations depends on relative slope of the panel
+downstream. If its slope is larger than the one of the panel upstream, shock wave
+equations are used, otherwise flow parameters are calculated using expansion wave
+equations.
+
+
+USAGE
+
+Application usage: shockexpansion.exe <problem_definition_file>
+
+Example of a problem definition file:
+
+****************************************
+mach_number = 4.0
+pressure = 100000.0
+density = 1.225
+
+
+#geometry#
+0.     0.
+0.0625 0.0106
+0.125  0.0202
+0.1875 0.0292
+0.25   0.0375
+0.3125 0.0449
+0.375  0.0518
+0.4375 0.0577
+0.5    0.0628
+0.5625 0.0669
+0.625  0.0701
+0.6875 0.0720
+0.75   0.0726
+0.8125 0.0716
+0.875  0.0688
+0.9375 0.0633
+1.     0.
+****************************************
+
+Application generates an output file ("out.dat") and writes solving process
+log and calculation results into it.
+
+
+LIMITATIONS
+
+1. Airfoil geometry must be scaled to have its first node
+   at (0.0, 0.0) and its last node at (1.0, 0.0); 
+2. Aince only symmetrical airfoil can be calculated, you should provide
+   only one its upper part;
+3. Too large relative slope values can lead for the flow to become subsonic
+   or to separate, which will terminate the calculation.
+
+
+TO DO
+1. Improve application output and exception handling;
+2. Optimize solving algorithm: improve accuracy and solving speed.
+3. Add the ability to set angle-of-attack;
+4. Add flow separation calculation for cases of very high speeds ang large
+   slopes.
