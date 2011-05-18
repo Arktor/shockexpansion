@@ -154,10 +154,20 @@ ShExpPanel& ShExpPanel:: set_ro (double new_ro) throw (ShExpException)
 
 ShExpPanel& ShExpPanel:: set_p (double new_p) throw (ShExpException)
 {
-  if (new_p<=0)
+  if (new_p<0)
     throw ShExpException ("Error: negative pressure value.\n");
 
   pressure = new_p;
+  return *this;
+}
+
+
+ShExpPanel& ShExpPanel:: set_t (double new_t) throw (ShExpException)
+{
+  if (new_t<0)
+    throw ShExpException ("Error: negative temperature value.\n");
+
+  temperature = new_t;
   return *this;
 }
 

@@ -28,6 +28,7 @@ class ShExpPanel
   double mach_number;
   double density;
   double pressure;
+  double temperature;
   double pressure_coefficient;
   double wave_slope;
   double area;
@@ -53,6 +54,7 @@ class ShExpPanel
   double mach () const throw (); //< Returns Mach number of the flow on the panel.
   double ro () const throw (); //< Returns density on the panel.
   double p () const throw (); //< Returns pressure on the panel.
+  double t () const throw (); //<Returns temperature on the panel.
   double cp () const throw (); //< Returns pressure coefficient on the panel.
   
   //< Returns a shock wave or expansion wave slope on the panel.
@@ -70,6 +72,7 @@ class ShExpPanel
   ShExpPanel& set_mach (double new_mach) throw (ShExpException);
   ShExpPanel& set_ro (double new_ro) throw (ShExpException);
   ShExpPanel& set_p (double new_p) throw (ShExpException);
+  ShExpPanel& set_t (double new_t) throw (ShExpException);
   ShExpPanel& set_cp (double new_cp) throw ();
   ShExpPanel& set_wave_slp (double new_wave_slp) throw ();
 };
@@ -162,6 +165,12 @@ inline double ShExpPanel:: ro () const throw ()
 inline double ShExpPanel:: p () const throw ()
 {
   return pressure;
+}
+
+
+inline double ShExpPanel:: t () const throw ()
+{
+  return temperature;
 }
 
 
