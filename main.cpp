@@ -10,6 +10,8 @@ int main (int argc, char *argv[])
   double q0;
   double cx = 0.0;
   double area_all = 0.0;
+  const double R = 8.314472;
+  const double mju = 0.029;
 
   cout  << scientific << setprecision (6);
   out_str << scientific << setprecision (6);
@@ -79,6 +81,7 @@ int main (int argc, char *argv[])
 	  else
 	    solve_shock (airfoil[i-1], airfoil[i], 1.4);
 	  airfoil[i].set_cp ((airfoil[i].p()-airfoil[0].p())/q0);
+	  airfoil[i].set_t (airfoil[i].p()*mju/airfoil[i].ro()/R);
 	  solver_out (airfoil[i], out_str);
 	}
     }
